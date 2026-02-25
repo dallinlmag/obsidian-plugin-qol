@@ -1,11 +1,11 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
-	"version": "1.0.0",
+	"id": "obsidian-qol",
+	"name": "Obsidian QOL",
+	"version": "1.0.1",
 	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"description": "Small quality of life improvements like custom line width.",
+	"author": "dallinlmag",
+	"authorUrl": "https://github.com/dallinlmag/obsidian-plugin-qol",
+	"fundingUrl": "https://github.com/dallinlmag/obsidian-plugin-qol",
 	"isDesktopOnly": false
 }
