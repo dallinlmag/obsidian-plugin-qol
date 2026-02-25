@@ -3,7 +3,7 @@
 	"name": "Obsidian QOL",
 	"version": "1.0.1",
 	"minAppVersion": "0.15.0",
-	"description": "Small quality of life improvements like custom line width.",
+	"description": "super simple line width editor",
 	"author": "dallinlmag",
 	"authorUrl": "https://github.com/dallinlmag/obsidian-plugin-qol",
 	"fundingUrl": "https://github.com/dallinlmag/obsidian-plugin-qol",
