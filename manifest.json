@@ -3,9 +3,8 @@
 	"name": "Obsidian QOL",
 	"version": "1.0.1",
 	"minAppVersion": "0.15.0",
-	"description": "super simple line width editor",
+	"description": "Control the text width of your editor with a percentage-based slider and optional min/max pixel bounds.",
 	"author": "dallinlmag",
 	"authorUrl": "https://github.com/dallinlmag/obsidian-plugin-qol",
-	"fundingUrl": "https://github.com/dallinlmag/obsidian-plugin-qol",
 	"isDesktopOnly": false
 }

@@ -28,11 +28,8 @@ export class QOLSettingTab extends PluginSettingTab {
 		const {containerEl} = this;
 		containerEl.empty();
 
-		containerEl.createEl("h2", {text: "Text Width"});
-		containerEl.createEl("p", {
-			text: "Obsidian's default \"Readable line length\" is 700 px. Use that as a reference when setting min/max values below.",
-			cls: "setting-item-description",
-		});
+		new Setting(containerEl)
+			.setDesc("The default readable line length in Obsidian is 700 px. Use that as a reference when setting min/max values below.");
 
 		new Setting(containerEl)
 			.setName("Width percentage")

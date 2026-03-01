@@ -1,8 +1,6 @@
 import {Plugin} from 'obsidian';
 import {DEFAULT_SETTINGS, PluginSettings, QOLSettingTab} from "./settings";
 
-const STYLE_ID = "qol-text-width-style";
-
 export default class QOLPlugin extends Plugin {
 	settings: PluginSettings;
 	private previousReadableLineLength: boolean | null = null;
@@ -11,7 +9,9 @@ export default class QOLPlugin extends Plugin {
 		await this.loadSettings();
 
 		// Remember the user's current readable-line-length preference, then disable it
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
 		this.previousReadableLineLength = (this.app.vault as any).getConfig("readableLineLength") ?? true;
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
 		(this.app.vault as any).setConfig("readableLineLength", false);
 
 		this.applyWidthStyle();
@@ -19,16 +19,19 @@ export default class QOLPlugin extends Plugin {
 	}
 
 	onunload() {
-		// Remove injected style
-		document.getElementById(STYLE_ID)?.remove();
+		// Remove CSS custom properties
+		document.body.style.removeProperty("--qol-min-width");
+		document.body.style.removeProperty("--qol-preferred-width");
+		document.body.style.removeProperty("--qol-max-width");
 
 		// Restore the user's previous readable-line-length setting
 		if (this.previousReadableLineLength !== null) {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
 			(this.app.vault as any).setConfig("readableLineLength", this.previousReadableLineLength);
 		}
 	}
 
-	/** Build and inject (or update) the dynamic <style> element for text width. */
+	/** Update CSS custom properties used by styles.css for text width. */
 	applyWidthStyle() {
 		const {widthPercent, minWidthPx, maxWidthPx} = this.settings;
 
@@ -36,22 +39,9 @@ export default class QOLPlugin extends Plugin {
 		const preferred = `${widthPercent}%`;
 		const max = maxWidthPx > 0 ? `${maxWidthPx}px` : "100%";
 
-		const css = `
-/* QOL Plugin – text width override */
-.markdown-source-view .cm-sizer,
-.markdown-reading-view .markdown-preview-sizer {
-	max-width: clamp(${min}, ${preferred}, ${max}) !important;
-	margin-left: auto !important;
-	margin-right: auto !important;
-}`;
-
-		let styleEl = document.getElementById(STYLE_ID) as HTMLStyleElement | null;
-		if (!styleEl) {
-			styleEl = document.createElement("style");
-			styleEl.id = STYLE_ID;
-			document.head.appendChild(styleEl);
-		}
-		styleEl.textContent = css;
+		document.body.style.setProperty("--qol-min-width", min);
+		document.body.style.setProperty("--qol-preferred-width", preferred);
+		document.body.style.setProperty("--qol-max-width", max);
 	}
 
 	async loadSettings() {

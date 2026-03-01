@@ -1,8 +1,11 @@
-/*
-
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
-
-If your plugin does not need CSS, delete this file.
-
-*/
+/* QOL Plugin – text width override */
+.markdown-source-view .cm-sizer,
+.markdown-reading-view .markdown-preview-sizer {
+	max-width: clamp(
+		var(--qol-min-width, 0px),
+		var(--qol-preferred-width, 100%),
+		var(--qol-max-width, 100%)
+	) !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
